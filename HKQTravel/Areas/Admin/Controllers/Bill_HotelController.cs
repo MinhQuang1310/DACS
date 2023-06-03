@@ -15,7 +15,18 @@ namespace HKQTravel.Areas.Admin.Controllers
         {
             int pagenumber = (page ?? 1);
             int pagesize = 5;
-            return View(data.bill_hotels/*.Where(p=>p.Status != 0)*/.ToList().ToPagedList(pagenumber, pagesize));
+            return View(data.bill_hotels.ToList().ToPagedList(pagenumber, pagesize));
+        }
+        public ActionResult Details(int id)
+        {
+            bill_hotel bh = data.bill_hotels.FirstOrDefault(p => p.bill_hotel_id == id);
+            ViewBag.bill_hotel_id = bh.bill_hotel_id;
+            if (bh == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(bh);
         }
     }
 }

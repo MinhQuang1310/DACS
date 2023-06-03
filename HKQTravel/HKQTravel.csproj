@@ -458,6 +458,9 @@
     <Content Include="Areas\Admin\Views\User\Index.cshtml" />
     <Content Include="Areas\Admin\Views\User\Trashlist.cshtml" />
     <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\Bill_Flight\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Bill_Hotel\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Bill_Tour\Details.cshtml" />
     <None Include="Models\HKQTravel.dbml.layout">
       <DependentUpon>HKQTravel.dbml</DependentUpon>
     </None>

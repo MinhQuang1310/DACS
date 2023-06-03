@@ -110,24 +110,7 @@
                                         <p>Quản lý quản trị</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="@Url.Action("","Bill_Flight")" class="nav-link">
-                                        <i class="fas fa-map-marked-alt nav-icon"></i>
-                                        <p>Quản lý hóa đơn chuyến bay</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="@Url.Action("","Bill_Hotel")" class="nav-link">
-                                        <i class="fas fa-plane nav-icon"></i>
-                                        <p>Quản lý hóa đơn khách sạn</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="@Url.Action("","Bill_Tour")" class="nav-link">
-                                        <i class="fas fa-hotel nav-icon"></i>
-                                        <p>Quản lý hóa đơn tour</p>
-                                    </a>
-                                </li>
+                               
                                 <li class="nav-item">
                                     <a href="@Url.Action("","Class")" class="nav-link">
                                         <i class="fas fa-hotel nav-icon"></i>
@@ -188,9 +171,39 @@
                                         <p>Quản lý người dùng</p>
                                     </a>
                                 </li>
-
-
-</nav>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-receipt"></i>
+                                <p>
+                                    HÓA ĐƠN
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="@Url.Action("","Bill_Flight")" class="nav-link">
+                                        <i class="fas fa-map-marked-alt nav-icon"></i>
+                                        <p>Hóa đơn chuyến bay</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("","Bill_Hotel")" class="nav-link">
+                                        <i class="fas fa-plane nav-icon"></i>
+                                        <p>Hóa đơn khách sạn</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("","Bill_Tour")" class="nav-link">
+                                        <i class="fas fa-hotel nav-icon"></i>
+                                        <p>Hóa đơn tour</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
                 <!-- /.sidebar-menu -->
             </div>
             <!-- /.sidebar -->

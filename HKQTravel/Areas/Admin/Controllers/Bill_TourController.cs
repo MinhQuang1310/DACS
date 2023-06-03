@@ -16,7 +16,18 @@ namespace HKQTravel.Areas.Admin.Controllers
         {
             int pagenumber = (page ?? 1);
             int pagesize = 5;
-            return View(data.bill_tours/*.Where(p=>p.Status != 0)*/.ToList().ToPagedList(pagenumber, pagesize));
+            return View(data.bill_tours.ToList().ToPagedList(pagenumber, pagesize));
+        }
+        public ActionResult Details(int id)
+        {
+            bill_tour bh = data.bill_tours.FirstOrDefault(p => p.bill_tour_id == id);
+            ViewBag.bill_tour_id = bh.bill_tour_id;
+            if (bh == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(bh);
         }
     }
 }

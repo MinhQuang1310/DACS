@@ -5,7 +5,7 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-@using (Html.BeginForm("Create", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Create", "User", FormMethod.Post, new { @enctype = "multipart/form-data" }))
 {
 @Html.AntiForgeryToken()
 
@@ -81,7 +81,7 @@
                         <label for="name">Hình ảnh nhân viên:</label>
                         @Html.TextBox("fileImage", "", new { type = "file", accept = "image/*" })
                         <br />
-                        <img id="preview" width="150" height="100" class="hidden" />
+                        <img id="preview" src="#" width="150" height="100" class="hidden" />
                         <br />
                         @Html.ValidationMessageFor(model => model.user_image, "", new { @class = "text-danger" })
 
