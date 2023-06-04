@@ -188,49 +188,49 @@ namespace HQKTravel.Controllers
                 guest.address = ADDRESS;
                 guest.create_date = DateTime.Now;
 
+                /*                if (ImageFile != null && ImageFile.ContentLength > 0)
+                                {
+                                    var fileName = Path.GetFileName(ImageFile.FileName);
+                                    var path = Path.Combine(Server.MapPath("~/Assets/User/img_account/"), fileName);
+
+                                    //Xóa file cũ trước đó
+                                    if (System.IO.File.Exists(path))
+                                    {
+                                        System.IO.File.Delete(path);
+                                    }
+
+
+                                    var fileCount = 1;
+                                    //Kiểm tra sự tồn tại của file
+                                    while (System.IO.File.Exists(path))
+                                    {
+                                        fileName = Path.GetFileNameWithoutExtension(ImageFile.FileName) + "-" + fileCount.ToString() + Path.GetExtension(ImageFile.FileName);
+                                        path = Path.Combine(Server.MapPath("~/Assets/User/img_account/"), fileName);
+                                        fileCount++;
+                                    }
+                                    ImageFile.SaveAs(path);
+                                    guest.user_image = "~/Assets/User/img_account/" + fileName;
+
+                                    data.SubmitChanges();
+                                    return RedirectToAction("Index", "User");
+                                }
+                                else
+                                {
+                                    ModelState.AddModelError("fileUpLoad", "thếu hình");
+                                    return View(guest);
+                                }*/
                 if (ImageFile != null && ImageFile.ContentLength > 0)
                 {
-                    var fileName = Path.GetFileName(ImageFile.FileName);
-                    var path = Path.Combine(Server.MapPath("~/Assets/User/img_account/"), fileName);
-
-                    //Xóa file cũ trước đó
-                    if (System.IO.File.Exists(path))
-                    {
-                        System.IO.File.Delete(path);
-                    }
-
-
-                    var fileCount = 1;
-                    //Kiểm tra sự tồn tại của file
-                    while (System.IO.File.Exists(path))
-                    {
-                        fileName = Path.GetFileNameWithoutExtension(ImageFile.FileName) + "-" + fileCount.ToString() + Path.GetExtension(ImageFile.FileName);
-                        path = Path.Combine(Server.MapPath("~/Assets/User/img_account/"), fileName);
-                        fileCount++;
-                    }
-                    ImageFile.SaveAs(path);
-                    guest.user_image = "~/Assets/User/img_account/" + fileName;
-
-                    data.SubmitChanges();
-                    return RedirectToAction("Index", "User");
-                }
-                else
-                {
-                    ModelState.AddModelError("fileUpLoad", "thếu hình");
-                    return View(guest);
-                }
-                /*if (ImageFile != null && ImageFile.ContentLength > 0)
-                {
                     var filename = Path.GetFileName(ImageFile.FileName);
-                    string path = Path.Combine(Server.MapPath("~/img_guest"), filename);
+                    string path = Path.Combine(Server.MapPath("~/Assets/User/img_account/"), filename);
                     ImageFile.SaveAs(path);
                     ViewBag.FileStatus = "File uploaded successfully.";
-                    guest.user_image = "/img_guest" + filename;
+                    guest.user_image = "~/Assets/User/img_account/" + filename;
                 }
                 else
                 {
                     ViewBag.FileStatus = "Error while file uploading."; ;
-                }*/
+                }
                 data.user_accounts.InsertOnSubmit(guest);
                 data.SubmitChanges();
                 return RedirectToAction("Index", "Home");
