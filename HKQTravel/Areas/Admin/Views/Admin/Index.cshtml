@@ -1,6 +1,6 @@
 ﻿@using PagedList.Mvc;
 @using HKQTravel.Models;
-@model  PagedList.PagedList<HKQTravel.Models.admin_account>
+@model PagedList.PagedList<HKQTravel.Models.admin_account>
 
 @{
     ViewBag.Title = "Index";
@@ -19,7 +19,7 @@
                 </div>
                 <div class="col-md-6 text-right">
                     <a href="@Url.Action("Create","Admin")" class="btn btn-sm btn-success">Thêm</a>
-                    <a href="@Url.Action("","")" class="btn btn-sm btn-danger">Thùng rác</a>
+                    <a href="@Url.Action("Trashlist","Admin")" class="btn btn-sm btn-danger">Thùng rác</a>
                 </div>
             </div>
         </div>
@@ -57,7 +57,7 @@
                             }
                             <a href="@Url.Action("Edit","Admin",new { id = item.admin_id })" class="btn btn-sm btn-success">Sửa</a>
                             <a href="@Url.Action("Details","Admin",new { id = item.admin_id })" class="btn btn-sm btn-info">Chi tiết</a>
-                            <a href="@Url.Action("Delete","Admin",new { id = item.admin_id })" class="btn btn-sm btn-danger">Xóa</a>
+                            <a href="@Url.Action("DeleteTemporary","Admin",new { id = item.admin_id })" class="btn btn-sm btn-danger">Xóa</a>
                         </td>
                     </tr>
                 }

@@ -33,25 +33,26 @@
                             <label for="name">Tên điểm đến:</label>
                             @Html.EditorFor(model => model.destination_name, new { htmlAttributes = new { @class = "form-control" } })
                         </div>
-                       
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="name">Hình ảnh điểm đến:</label>
-                            @Html.TextBox("fileImage", "", new { type = "file", accept = "image/*" })
-                            <br />
-                            <img id="preview" width="150" height="100" class="hidden" />
-                            <br />
-                            @Html.ValidationMessageFor(model => model.destination_image, "", new { @class = "text-danger" })
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="name">Hình ảnh điểm đến:</label>
+                                @Html.TextBox("fileImage", "", new { type = "file", accept = "image/*" })
+                                <br />
+                                <img id="preview" width="150" height="100" class="hidden" />
+                                <br />
+                                @Html.ValidationMessageFor(model => model.destination_image, "", new { @class = "text-danger" })
+
+                            </div>
 
                         </div>
-
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="card-footer text-right">
-            <button class="btn btn-success btn-sm" type="submit">Lưu</button>
-            <a href="@Url.Action("Index", "Destination_Point")" class="btn btn-sm btn-primary"> <i class="fas fa-arrow-circle-left"></i>Về lại danh sách</a>
+            <div class="card-footer text-right">
+                <button class="btn btn-success btn-sm" type="submit">Lưu</button>
+                <a href="@Url.Action("Index", "Destination_Point")" class="btn btn-sm btn-primary"> <i class="fas fa-arrow-circle-left"></i>Về lại danh sách</a>
+            </div>
         </div>
     </section>
 }

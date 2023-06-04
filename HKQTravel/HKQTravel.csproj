@@ -461,6 +461,11 @@
     <Content Include="Areas\Admin\Views\Bill_Flight\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Bill_Hotel\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Bill_Tour\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\Trashlist.cshtml" />
     <None Include="Models\HKQTravel.dbml.layout">
       <DependentUpon>HKQTravel.dbml</DependentUpon>
     </None>

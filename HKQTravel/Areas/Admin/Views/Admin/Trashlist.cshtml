@@ -1,0 +1,151 @@
+﻿@using PagedList.Mvc;
+@using HKQTravel.Models;
+@model PagedList.PagedList<HKQTravel.Models.admin_account>
+
+@{
+    ViewBag.Title = "Trashlist";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Trashlist</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.admin_user)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.admin_password)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.admin_fulllname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.create_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.update_date)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.admin_user)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.admin_password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.admin_fulllname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.create_date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.update_date)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.admin_id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.admin_id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.admin_id })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-6">
+                    <strong class="text-danger">
+                        DANH SÁCH QUẢN TRỊ VIÊN
+                    </strong>
+                </div>
+                <div class="col-md-6 text-right">
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <table class="table table-bordered">
+                <tr>
+                    <th>#</th>
+                    <th>Id</th>
+                    <th>Tài khoản</th>
+                    <th>Mật khẩu</th>
+                    <th>Họ và tên</th>
+                    <th>Email</th>
+                    <th>Trạng thái</th>
+                    <th>Chức năng</th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="text-center"><input type="checkbox" /></td>
+                        <td class="text-center">@item.admin_id</td>
+                        <td>@item.admin_user</td>
+                        <td>@item.admin_password</td>
+                        <td>@item.admin_fulllname</td>
+                        <td>@item.email</td>
+                        <td>@item.status</td>
+                        <td class="text-center">
+                            @if (item.status == 1)
+                            {
+                                <a href="@Url.Action("Status","Admin",new { id = item.admin_id })" class="btn btn-sm btn-success"><i class="fas fa-toggle-on"></i></a>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("Status","Admin",new { id = item.admin_id })" class="btn btn-sm btn-danger"><i class="fas fa-toggle-off"></i></a>
+                            }
+                           
+                            <a href="@Url.Action("Delete","Admin",new { id = item.admin_id })" class="btn btn-sm btn-danger">Xóa</a>
+                        </td>
+                    </tr>
+                }
+            </table>
+
+        </div>
+        <div class="card-footer">
+            Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount;
+            <div class="MenuTrang">
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+            </div>
+            <style>
+                .MenuTrang li {
+                    display: inline;
+                }
+
+                    .MenuTrang li a {
+                        color: black;
+                        float: left;
+                        padding: 8px 16px;
+                        text-decoration: none;
+                    }
+            </style>
+        </div>
+    </div>
+</section>
