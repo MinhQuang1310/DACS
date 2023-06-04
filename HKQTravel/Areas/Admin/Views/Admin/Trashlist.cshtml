@@ -9,69 +9,6 @@
 
 <h2>Trashlist</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.admin_user)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.admin_password)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.admin_fulllname)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.status)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.create_date)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.update_date)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.admin_user)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.admin_password)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.admin_fulllname)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.create_date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.update_date)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.admin_id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.admin_id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.admin_id })
-            </td>
-        </tr>
-    }
-
-</table>
-
 <section class="content">
 
     <!-- Default box -->
@@ -111,18 +48,15 @@
                         <td>@item.admin_password</td>
                         <td>@item.admin_fulllname</td>
                         <td>@item.email</td>
-                        <td>@item.status</td>
+
+                        @if (item.status == 0)
+                        {
+                            <td>Đang Xóa tạm </td>
+                        }
+
                         <td class="text-center">
-                            @if (item.status == 1)
-                            {
-                                <a href="@Url.Action("Status","Admin",new { id = item.admin_id })" class="btn btn-sm btn-success"><i class="fas fa-toggle-on"></i></a>
-                            }
-                            else
-                            {
-                                <a href="@Url.Action("Status","Admin",new { id = item.admin_id })" class="btn btn-sm btn-danger"><i class="fas fa-toggle-off"></i></a>
-                            }
-                           
-                            <a href="@Url.Action("Delete","Admin",new { id = item.admin_id })" class="btn btn-sm btn-danger">Xóa</a>
+                            <a href="@Url.Action("Restore","Admin",new { id = item.admin_id })" class="btn btn-sm btn-info"><i class="fas fa-undo-alt"></i></a>
+                            <a href="@Url.Action("Delete","Admin",new { id = item.admin_id })" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
                         </td>
                     </tr>
                 }

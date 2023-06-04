@@ -22,7 +22,7 @@ namespace HKQTravel.Models
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="HKQTravel")]
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="HKQTravel1")]
 	public partial class HKQTravelDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -33,18 +33,21 @@ namespace HKQTravel.Models
     partial void Insertadmin_account(admin_account instance);
     partial void Updateadmin_account(admin_account instance);
     partial void Deleteadmin_account(admin_account instance);
+    partial void Insertuser_account(user_account instance);
+    partial void Updateuser_account(user_account instance);
+    partial void Deleteuser_account(user_account instance);
     partial void Insertbill_flight(bill_flight instance);
     partial void Updatebill_flight(bill_flight instance);
     partial void Deletebill_flight(bill_flight instance);
     partial void Insertbill_hotel(bill_hotel instance);
     partial void Updatebill_hotel(bill_hotel instance);
     partial void Deletebill_hotel(bill_hotel instance);
-    partial void Insertclass(@class instance);
-    partial void Updateclass(@class instance);
-    partial void Deleteclass(@class instance);
     partial void Insertbill_tour(bill_tour instance);
     partial void Updatebill_tour(bill_tour instance);
     partial void Deletebill_tour(bill_tour instance);
+    partial void Insertclass(@class instance);
+    partial void Updateclass(@class instance);
+    partial void Deleteclass(@class instance);
     partial void Insertdeparture_point(departure_point instance);
     partial void Updatedeparture_point(departure_point instance);
     partial void Deletedeparture_point(departure_point instance);
@@ -69,13 +72,10 @@ namespace HKQTravel.Models
     partial void Inserttour_type(tour_type instance);
     partial void Updatetour_type(tour_type instance);
     partial void Deletetour_type(tour_type instance);
-    partial void Insertuser_account(user_account instance);
-    partial void Updateuser_account(user_account instance);
-    partial void Deleteuser_account(user_account instance);
         #endregion
 
         public HKQTravelDataContext() :
-                base(global::System.Configuration.ConfigurationManager.ConnectionStrings["HKQTravelConnectionString2"].ConnectionString, mappingSource)
+            base(global::System.Configuration.ConfigurationManager.ConnectionStrings["HKQTravel1ConnectionString"].ConnectionString, mappingSource)
         {
             OnCreated();
         }
@@ -106,6 +106,14 @@ namespace HKQTravel.Models
 			}
 		}
 		
+		public System.Data.Linq.Table<user_account> user_accounts
+		{
+			get
+			{
+				return this.GetTable<user_account>();
+			}
+		}
+		
 		public System.Data.Linq.Table<bill_flight> bill_flights
 		{
 			get
@@ -122,19 +130,19 @@ namespace HKQTravel.Models
 			}
 		}
 		
-		public System.Data.Linq.Table<@class> classes
-		{
-			get
-			{
-				return this.GetTable<@class>();
-			}
-		}
-		
 		public System.Data.Linq.Table<bill_tour> bill_tours
 		{
 			get
 			{
 				return this.GetTable<bill_tour>();
+			}
+		}
+		
+		public System.Data.Linq.Table<@class> classes
+		{
+			get
+			{
+				return this.GetTable<@class>();
 			}
 		}
 		
@@ -199,14 +207,6 @@ namespace HKQTravel.Models
 			get
 			{
 				return this.GetTable<tour_type>();
-			}
-		}
-		
-		public System.Data.Linq.Table<user_account> user_accounts
-		{
-			get
-			{
-				return this.GetTable<user_account>();
 			}
 		}
 	}
@@ -441,6 +441,440 @@ namespace HKQTravel.Models
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.user_account")]
+	public partial class user_account : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private long _user_id;
+		
+		private string _user_name;
+		
+		private string _user_password;
+		
+		private string _user_fullname;
+		
+		private string _phone_number;
+		
+		private string _email;
+		
+		private System.Nullable<System.DateTime> _birthday;
+		
+		private string _address;
+		
+		private string _sex;
+		
+		private string _user_image;
+		
+		private System.Nullable<System.DateTime> _create_date;
+		
+		private System.Nullable<System.DateTime> _update_date;
+		
+		private System.Nullable<int> _status;
+		
+		private EntitySet<bill_flight> _bill_flights;
+		
+		private EntitySet<bill_hotel> _bill_hotels;
+		
+		private EntitySet<bill_tour> _bill_tours;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onuser_idChanging(long value);
+    partial void Onuser_idChanged();
+    partial void Onuser_nameChanging(string value);
+    partial void Onuser_nameChanged();
+    partial void Onuser_passwordChanging(string value);
+    partial void Onuser_passwordChanged();
+    partial void Onuser_fullnameChanging(string value);
+    partial void Onuser_fullnameChanged();
+    partial void Onphone_numberChanging(string value);
+    partial void Onphone_numberChanged();
+    partial void OnemailChanging(string value);
+    partial void OnemailChanged();
+    partial void OnbirthdayChanging(System.Nullable<System.DateTime> value);
+    partial void OnbirthdayChanged();
+    partial void OnaddressChanging(string value);
+    partial void OnaddressChanged();
+    partial void OnsexChanging(string value);
+    partial void OnsexChanged();
+    partial void Onuser_imageChanging(string value);
+    partial void Onuser_imageChanged();
+    partial void Oncreate_dateChanging(System.Nullable<System.DateTime> value);
+    partial void Oncreate_dateChanged();
+    partial void Onupdate_dateChanging(System.Nullable<System.DateTime> value);
+    partial void Onupdate_dateChanged();
+    partial void OnstatusChanging(System.Nullable<int> value);
+    partial void OnstatusChanged();
+    #endregion
+		
+		public user_account()
+		{
+			this._bill_flights = new EntitySet<bill_flight>(new Action<bill_flight>(this.attach_bill_flights), new Action<bill_flight>(this.detach_bill_flights));
+			this._bill_hotels = new EntitySet<bill_hotel>(new Action<bill_hotel>(this.attach_bill_hotels), new Action<bill_hotel>(this.detach_bill_hotels));
+			this._bill_tours = new EntitySet<bill_tour>(new Action<bill_tour>(this.attach_bill_tours), new Action<bill_tour>(this.detach_bill_tours));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_id", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public long user_id
+		{
+			get
+			{
+				return this._user_id;
+			}
+			set
+			{
+				if ((this._user_id != value))
+				{
+					this.Onuser_idChanging(value);
+					this.SendPropertyChanging();
+					this._user_id = value;
+					this.SendPropertyChanged("user_id");
+					this.Onuser_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string user_name
+		{
+			get
+			{
+				return this._user_name;
+			}
+			set
+			{
+				if ((this._user_name != value))
+				{
+					this.Onuser_nameChanging(value);
+					this.SendPropertyChanging();
+					this._user_name = value;
+					this.SendPropertyChanged("user_name");
+					this.Onuser_nameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_password", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string user_password
+		{
+			get
+			{
+				return this._user_password;
+			}
+			set
+			{
+				if ((this._user_password != value))
+				{
+					this.Onuser_passwordChanging(value);
+					this.SendPropertyChanging();
+					this._user_password = value;
+					this.SendPropertyChanged("user_password");
+					this.Onuser_passwordChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_fullname", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string user_fullname
+		{
+			get
+			{
+				return this._user_fullname;
+			}
+			set
+			{
+				if ((this._user_fullname != value))
+				{
+					this.Onuser_fullnameChanging(value);
+					this.SendPropertyChanging();
+					this._user_fullname = value;
+					this.SendPropertyChanged("user_fullname");
+					this.Onuser_fullnameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_phone_number", DbType="VarChar(20)")]
+		public string phone_number
+		{
+			get
+			{
+				return this._phone_number;
+			}
+			set
+			{
+				if ((this._phone_number != value))
+				{
+					this.Onphone_numberChanging(value);
+					this.SendPropertyChanging();
+					this._phone_number = value;
+					this.SendPropertyChanged("phone_number");
+					this.Onphone_numberChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_email", DbType="VarChar(100)")]
+		public string email
+		{
+			get
+			{
+				return this._email;
+			}
+			set
+			{
+				if ((this._email != value))
+				{
+					this.OnemailChanging(value);
+					this.SendPropertyChanging();
+					this._email = value;
+					this.SendPropertyChanged("email");
+					this.OnemailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_birthday", DbType="DateTime")]
+		public System.Nullable<System.DateTime> birthday
+		{
+			get
+			{
+				return this._birthday;
+			}
+			set
+			{
+				if ((this._birthday != value))
+				{
+					this.OnbirthdayChanging(value);
+					this.SendPropertyChanging();
+					this._birthday = value;
+					this.SendPropertyChanged("birthday");
+					this.OnbirthdayChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_address", DbType="NVarChar(150)")]
+		public string address
+		{
+			get
+			{
+				return this._address;
+			}
+			set
+			{
+				if ((this._address != value))
+				{
+					this.OnaddressChanging(value);
+					this.SendPropertyChanging();
+					this._address = value;
+					this.SendPropertyChanged("address");
+					this.OnaddressChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_sex", DbType="VarChar(5)")]
+		public string sex
+		{
+			get
+			{
+				return this._sex;
+			}
+			set
+			{
+				if ((this._sex != value))
+				{
+					this.OnsexChanging(value);
+					this.SendPropertyChanging();
+					this._sex = value;
+					this.SendPropertyChanged("sex");
+					this.OnsexChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_image", DbType="VarChar(MAX)")]
+		public string user_image
+		{
+			get
+			{
+				return this._user_image;
+			}
+			set
+			{
+				if ((this._user_image != value))
+				{
+					this.Onuser_imageChanging(value);
+					this.SendPropertyChanging();
+					this._user_image = value;
+					this.SendPropertyChanged("user_image");
+					this.Onuser_imageChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_create_date", DbType="DateTime")]
+		public System.Nullable<System.DateTime> create_date
+		{
+			get
+			{
+				return this._create_date;
+			}
+			set
+			{
+				if ((this._create_date != value))
+				{
+					this.Oncreate_dateChanging(value);
+					this.SendPropertyChanging();
+					this._create_date = value;
+					this.SendPropertyChanged("create_date");
+					this.Oncreate_dateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_update_date", DbType="DateTime")]
+		public System.Nullable<System.DateTime> update_date
+		{
+			get
+			{
+				return this._update_date;
+			}
+			set
+			{
+				if ((this._update_date != value))
+				{
+					this.Onupdate_dateChanging(value);
+					this.SendPropertyChanging();
+					this._update_date = value;
+					this.SendPropertyChanged("update_date");
+					this.Onupdate_dateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_status", DbType="Int")]
+		public System.Nullable<int> status
+		{
+			get
+			{
+				return this._status;
+			}
+			set
+			{
+				if ((this._status != value))
+				{
+					this.OnstatusChanging(value);
+					this.SendPropertyChanging();
+					this._status = value;
+					this.SendPropertyChanged("status");
+					this.OnstatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_account_bill_flight", Storage="_bill_flights", ThisKey="user_id", OtherKey="user_id")]
+		public EntitySet<bill_flight> bill_flights
+		{
+			get
+			{
+				return this._bill_flights;
+			}
+			set
+			{
+				this._bill_flights.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_account_bill_hotel", Storage="_bill_hotels", ThisKey="user_id", OtherKey="user_id")]
+		public EntitySet<bill_hotel> bill_hotels
+		{
+			get
+			{
+				return this._bill_hotels;
+			}
+			set
+			{
+				this._bill_hotels.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_account_bill_tour", Storage="_bill_tours", ThisKey="user_id", OtherKey="user_id")]
+		public EntitySet<bill_tour> bill_tours
+		{
+			get
+			{
+				return this._bill_tours;
+			}
+			set
+			{
+				this._bill_tours.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_bill_flights(bill_flight entity)
+		{
+			this.SendPropertyChanging();
+			entity.user_account = this;
+		}
+		
+		private void detach_bill_flights(bill_flight entity)
+		{
+			this.SendPropertyChanging();
+			entity.user_account = null;
+		}
+		
+		private void attach_bill_hotels(bill_hotel entity)
+		{
+			this.SendPropertyChanging();
+			entity.user_account = this;
+		}
+		
+		private void detach_bill_hotels(bill_hotel entity)
+		{
+			this.SendPropertyChanging();
+			entity.user_account = null;
+		}
+		
+		private void attach_bill_tours(bill_tour entity)
+		{
+			this.SendPropertyChanging();
+			entity.user_account = this;
+		}
+		
+		private void detach_bill_tours(bill_tour entity)
+		{
+			this.SendPropertyChanging();
+			entity.user_account = null;
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.bill_flight")]
 	public partial class bill_flight : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -459,9 +893,9 @@ namespace HKQTravel.Models
 		
 		private System.Nullable<long> _flight_id;
 		
-		private EntityRef<flight> _flight;
-		
 		private EntityRef<user_account> _user_account;
+		
+		private EntityRef<flight> _flight;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -483,8 +917,8 @@ namespace HKQTravel.Models
 		
 		public bill_flight()
 		{
-			this._flight = default(EntityRef<flight>);
 			this._user_account = default(EntityRef<user_account>);
+			this._flight = default(EntityRef<flight>);
 			OnCreated();
 		}
 		
@@ -616,40 +1050,6 @@ namespace HKQTravel.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="flight_bill_flight", Storage="_flight", ThisKey="flight_id", OtherKey="flight_id", IsForeignKey=true)]
-		public flight flight
-		{
-			get
-			{
-				return this._flight.Entity;
-			}
-			set
-			{
-				flight previousValue = this._flight.Entity;
-				if (((previousValue != value) 
-							|| (this._flight.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._flight.Entity = null;
-						previousValue.bill_flights.Remove(this);
-					}
-					this._flight.Entity = value;
-					if ((value != null))
-					{
-						value.bill_flights.Add(this);
-						this._flight_id = value.flight_id;
-					}
-					else
-					{
-						this._flight_id = default(Nullable<long>);
-					}
-					this.SendPropertyChanged("flight");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_account_bill_flight", Storage="_user_account", ThisKey="user_id", OtherKey="user_id", IsForeignKey=true)]
 		public user_account user_account
 		{
@@ -680,6 +1080,40 @@ namespace HKQTravel.Models
 						this._user_id = default(Nullable<long>);
 					}
 					this.SendPropertyChanged("user_account");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="flight_bill_flight", Storage="_flight", ThisKey="flight_id", OtherKey="flight_id", IsForeignKey=true)]
+		public flight flight
+		{
+			get
+			{
+				return this._flight.Entity;
+			}
+			set
+			{
+				flight previousValue = this._flight.Entity;
+				if (((previousValue != value) 
+							|| (this._flight.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._flight.Entity = null;
+						previousValue.bill_flights.Remove(this);
+					}
+					this._flight.Entity = value;
+					if ((value != null))
+					{
+						value.bill_flights.Add(this);
+						this._flight_id = value.flight_id;
+					}
+					else
+					{
+						this._flight_id = default(Nullable<long>);
+					}
+					this.SendPropertyChanged("flight");
 				}
 			}
 		}
@@ -723,9 +1157,9 @@ namespace HKQTravel.Models
 		
 		private System.Nullable<long> _hotel_id;
 		
-		private EntityRef<hotel> _hotel;
-		
 		private EntityRef<user_account> _user_account;
+		
+		private EntityRef<hotel> _hotel;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -747,8 +1181,8 @@ namespace HKQTravel.Models
 		
 		public bill_hotel()
 		{
-			this._hotel = default(EntityRef<hotel>);
 			this._user_account = default(EntityRef<user_account>);
+			this._hotel = default(EntityRef<hotel>);
 			OnCreated();
 		}
 		
@@ -880,6 +1314,40 @@ namespace HKQTravel.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_account_bill_hotel", Storage="_user_account", ThisKey="user_id", OtherKey="user_id", IsForeignKey=true)]
+		public user_account user_account
+		{
+			get
+			{
+				return this._user_account.Entity;
+			}
+			set
+			{
+				user_account previousValue = this._user_account.Entity;
+				if (((previousValue != value) 
+							|| (this._user_account.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._user_account.Entity = null;
+						previousValue.bill_hotels.Remove(this);
+					}
+					this._user_account.Entity = value;
+					if ((value != null))
+					{
+						value.bill_hotels.Add(this);
+						this._user_id = value.user_id;
+					}
+					else
+					{
+						this._user_id = default(Nullable<long>);
+					}
+					this.SendPropertyChanged("user_account");
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="hotel_bill_hotel", Storage="_hotel", ThisKey="hotel_id", OtherKey="hotel_id", IsForeignKey=true)]
 		public hotel hotel
 		{
@@ -914,7 +1382,203 @@ namespace HKQTravel.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_account_bill_hotel", Storage="_user_account", ThisKey="user_id", OtherKey="user_id", IsForeignKey=true)]
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.bill_tour")]
+	public partial class bill_tour : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private long _bill_tour_id;
+		
+		private System.Nullable<decimal> _total;
+		
+		private System.Nullable<System.DateTime> _create_date;
+		
+		private System.Nullable<int> _quantity;
+		
+		private System.Nullable<long> _user_id;
+		
+		private System.Nullable<long> _tour_id;
+		
+		private EntityRef<user_account> _user_account;
+		
+		private EntityRef<tour> _tour;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onbill_tour_idChanging(long value);
+    partial void Onbill_tour_idChanged();
+    partial void OntotalChanging(System.Nullable<decimal> value);
+    partial void OntotalChanged();
+    partial void Oncreate_dateChanging(System.Nullable<System.DateTime> value);
+    partial void Oncreate_dateChanged();
+    partial void OnquantityChanging(System.Nullable<int> value);
+    partial void OnquantityChanged();
+    partial void Onuser_idChanging(System.Nullable<long> value);
+    partial void Onuser_idChanged();
+    partial void Ontour_idChanging(System.Nullable<long> value);
+    partial void Ontour_idChanged();
+    #endregion
+		
+		public bill_tour()
+		{
+			this._user_account = default(EntityRef<user_account>);
+			this._tour = default(EntityRef<tour>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_bill_tour_id", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public long bill_tour_id
+		{
+			get
+			{
+				return this._bill_tour_id;
+			}
+			set
+			{
+				if ((this._bill_tour_id != value))
+				{
+					this.Onbill_tour_idChanging(value);
+					this.SendPropertyChanging();
+					this._bill_tour_id = value;
+					this.SendPropertyChanged("bill_tour_id");
+					this.Onbill_tour_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_total", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> total
+		{
+			get
+			{
+				return this._total;
+			}
+			set
+			{
+				if ((this._total != value))
+				{
+					this.OntotalChanging(value);
+					this.SendPropertyChanging();
+					this._total = value;
+					this.SendPropertyChanged("total");
+					this.OntotalChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_create_date", DbType="DateTime")]
+		public System.Nullable<System.DateTime> create_date
+		{
+			get
+			{
+				return this._create_date;
+			}
+			set
+			{
+				if ((this._create_date != value))
+				{
+					this.Oncreate_dateChanging(value);
+					this.SendPropertyChanging();
+					this._create_date = value;
+					this.SendPropertyChanged("create_date");
+					this.Oncreate_dateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_quantity", DbType="Int")]
+		public System.Nullable<int> quantity
+		{
+			get
+			{
+				return this._quantity;
+			}
+			set
+			{
+				if ((this._quantity != value))
+				{
+					this.OnquantityChanging(value);
+					this.SendPropertyChanging();
+					this._quantity = value;
+					this.SendPropertyChanged("quantity");
+					this.OnquantityChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_id", DbType="BigInt")]
+		public System.Nullable<long> user_id
+		{
+			get
+			{
+				return this._user_id;
+			}
+			set
+			{
+				if ((this._user_id != value))
+				{
+					if (this._user_account.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onuser_idChanging(value);
+					this.SendPropertyChanging();
+					this._user_id = value;
+					this.SendPropertyChanged("user_id");
+					this.Onuser_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_tour_id", DbType="BigInt")]
+		public System.Nullable<long> tour_id
+		{
+			get
+			{
+				return this._tour_id;
+			}
+			set
+			{
+				if ((this._tour_id != value))
+				{
+					if (this._tour.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Ontour_idChanging(value);
+					this.SendPropertyChanging();
+					this._tour_id = value;
+					this.SendPropertyChanged("tour_id");
+					this.Ontour_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_account_bill_tour", Storage="_user_account", ThisKey="user_id", OtherKey="user_id", IsForeignKey=true)]
 		public user_account user_account
 		{
 			get
@@ -931,12 +1595,12 @@ namespace HKQTravel.Models
 					if ((previousValue != null))
 					{
 						this._user_account.Entity = null;
-						previousValue.bill_hotels.Remove(this);
+						previousValue.bill_tours.Remove(this);
 					}
 					this._user_account.Entity = value;
 					if ((value != null))
 					{
-						value.bill_hotels.Add(this);
+						value.bill_tours.Add(this);
 						this._user_id = value.user_id;
 					}
 					else
@@ -944,6 +1608,40 @@ namespace HKQTravel.Models
 						this._user_id = default(Nullable<long>);
 					}
 					this.SendPropertyChanged("user_account");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tour_bill_tour", Storage="_tour", ThisKey="tour_id", OtherKey="tour_id", IsForeignKey=true)]
+		public tour tour
+		{
+			get
+			{
+				return this._tour.Entity;
+			}
+			set
+			{
+				tour previousValue = this._tour.Entity;
+				if (((previousValue != value) 
+							|| (this._tour.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tour.Entity = null;
+						previousValue.bill_tours.Remove(this);
+					}
+					this._tour.Entity = value;
+					if ((value != null))
+					{
+						value.bill_tours.Add(this);
+						this._tour_id = value.tour_id;
+					}
+					else
+					{
+						this._tour_id = default(Nullable<long>);
+					}
+					this.SendPropertyChanged("tour");
 				}
 			}
 		}
@@ -1080,270 +1778,6 @@ namespace HKQTravel.Models
 		{
 			this.SendPropertyChanging();
 			entity.@class = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.bill_tour")]
-	public partial class bill_tour : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private long _bill_tour_id;
-		
-		private System.Nullable<decimal> _total;
-		
-		private System.Nullable<System.DateTime> _create_date;
-		
-		private System.Nullable<int> _quantity;
-		
-		private System.Nullable<long> _user_id;
-		
-		private System.Nullable<long> _tour_id;
-		
-		private EntityRef<tour> _tour;
-		
-		private EntityRef<user_account> _user_account;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void Onbill_tour_idChanging(long value);
-    partial void Onbill_tour_idChanged();
-    partial void OntotalChanging(System.Nullable<decimal> value);
-    partial void OntotalChanged();
-    partial void Oncreate_dateChanging(System.Nullable<System.DateTime> value);
-    partial void Oncreate_dateChanged();
-    partial void OnquantityChanging(System.Nullable<int> value);
-    partial void OnquantityChanged();
-    partial void Onuser_idChanging(System.Nullable<long> value);
-    partial void Onuser_idChanged();
-    partial void Ontour_idChanging(System.Nullable<long> value);
-    partial void Ontour_idChanged();
-    #endregion
-		
-		public bill_tour()
-		{
-			this._tour = default(EntityRef<tour>);
-			this._user_account = default(EntityRef<user_account>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_bill_tour_id", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public long bill_tour_id
-		{
-			get
-			{
-				return this._bill_tour_id;
-			}
-			set
-			{
-				if ((this._bill_tour_id != value))
-				{
-					this.Onbill_tour_idChanging(value);
-					this.SendPropertyChanging();
-					this._bill_tour_id = value;
-					this.SendPropertyChanged("bill_tour_id");
-					this.Onbill_tour_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_total", DbType="Decimal(18,2)")]
-		public System.Nullable<decimal> total
-		{
-			get
-			{
-				return this._total;
-			}
-			set
-			{
-				if ((this._total != value))
-				{
-					this.OntotalChanging(value);
-					this.SendPropertyChanging();
-					this._total = value;
-					this.SendPropertyChanged("total");
-					this.OntotalChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_create_date", DbType="DateTime")]
-		public System.Nullable<System.DateTime> create_date
-		{
-			get
-			{
-				return this._create_date;
-			}
-			set
-			{
-				if ((this._create_date != value))
-				{
-					this.Oncreate_dateChanging(value);
-					this.SendPropertyChanging();
-					this._create_date = value;
-					this.SendPropertyChanged("create_date");
-					this.Oncreate_dateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_quantity", DbType="Int")]
-		public System.Nullable<int> quantity
-		{
-			get
-			{
-				return this._quantity;
-			}
-			set
-			{
-				if ((this._quantity != value))
-				{
-					this.OnquantityChanging(value);
-					this.SendPropertyChanging();
-					this._quantity = value;
-					this.SendPropertyChanged("quantity");
-					this.OnquantityChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_id", DbType="BigInt")]
-		public System.Nullable<long> user_id
-		{
-			get
-			{
-				return this._user_id;
-			}
-			set
-			{
-				if ((this._user_id != value))
-				{
-					if (this._user_account.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onuser_idChanging(value);
-					this.SendPropertyChanging();
-					this._user_id = value;
-					this.SendPropertyChanged("user_id");
-					this.Onuser_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_tour_id", DbType="BigInt")]
-		public System.Nullable<long> tour_id
-		{
-			get
-			{
-				return this._tour_id;
-			}
-			set
-			{
-				if ((this._tour_id != value))
-				{
-					if (this._tour.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Ontour_idChanging(value);
-					this.SendPropertyChanging();
-					this._tour_id = value;
-					this.SendPropertyChanged("tour_id");
-					this.Ontour_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tour_bill_tour", Storage="_tour", ThisKey="tour_id", OtherKey="tour_id", IsForeignKey=true)]
-		public tour tour
-		{
-			get
-			{
-				return this._tour.Entity;
-			}
-			set
-			{
-				tour previousValue = this._tour.Entity;
-				if (((previousValue != value) 
-							|| (this._tour.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._tour.Entity = null;
-						previousValue.bill_tours.Remove(this);
-					}
-					this._tour.Entity = value;
-					if ((value != null))
-					{
-						value.bill_tours.Add(this);
-						this._tour_id = value.tour_id;
-					}
-					else
-					{
-						this._tour_id = default(Nullable<long>);
-					}
-					this.SendPropertyChanged("tour");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_account_bill_tour", Storage="_user_account", ThisKey="user_id", OtherKey="user_id", IsForeignKey=true)]
-		public user_account user_account
-		{
-			get
-			{
-				return this._user_account.Entity;
-			}
-			set
-			{
-				user_account previousValue = this._user_account.Entity;
-				if (((previousValue != value) 
-							|| (this._user_account.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._user_account.Entity = null;
-						previousValue.bill_tours.Remove(this);
-					}
-					this._user_account.Entity = value;
-					if ((value != null))
-					{
-						value.bill_tours.Add(this);
-						this._user_id = value.user_id;
-					}
-					else
-					{
-						this._user_id = default(Nullable<long>);
-					}
-					this.SendPropertyChanged("user_account");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
 		}
 	}
 	
@@ -3342,440 +3776,6 @@ namespace HKQTravel.Models
 		{
 			this.SendPropertyChanging();
 			entity.tour_type = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.user_account")]
-	public partial class user_account : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private long _user_id;
-		
-		private string _user_name;
-		
-		private string _user_password;
-		
-		private string _user_fullname;
-		
-		private string _phone_number;
-		
-		private string _email;
-		
-		private System.Nullable<System.DateTime> _birthday;
-		
-		private string _address;
-		
-		private string _sex;
-		
-		private string _user_image;
-		
-		private System.Nullable<System.DateTime> _create_date;
-		
-		private System.Nullable<System.DateTime> _update_date;
-		
-		private System.Nullable<int> _status;
-		
-		private EntitySet<bill_flight> _bill_flights;
-		
-		private EntitySet<bill_hotel> _bill_hotels;
-		
-		private EntitySet<bill_tour> _bill_tours;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void Onuser_idChanging(long value);
-    partial void Onuser_idChanged();
-    partial void Onuser_nameChanging(string value);
-    partial void Onuser_nameChanged();
-    partial void Onuser_passwordChanging(string value);
-    partial void Onuser_passwordChanged();
-    partial void Onuser_fullnameChanging(string value);
-    partial void Onuser_fullnameChanged();
-    partial void Onphone_numberChanging(string value);
-    partial void Onphone_numberChanged();
-    partial void OnemailChanging(string value);
-    partial void OnemailChanged();
-    partial void OnbirthdayChanging(System.Nullable<System.DateTime> value);
-    partial void OnbirthdayChanged();
-    partial void OnaddressChanging(string value);
-    partial void OnaddressChanged();
-    partial void OnsexChanging(string value);
-    partial void OnsexChanged();
-    partial void Onuser_imageChanging(string value);
-    partial void Onuser_imageChanged();
-    partial void Oncreate_dateChanging(System.Nullable<System.DateTime> value);
-    partial void Oncreate_dateChanged();
-    partial void Onupdate_dateChanging(System.Nullable<System.DateTime> value);
-    partial void Onupdate_dateChanged();
-    partial void OnstatusChanging(System.Nullable<int> value);
-    partial void OnstatusChanged();
-    #endregion
-		
-		public user_account()
-		{
-			this._bill_flights = new EntitySet<bill_flight>(new Action<bill_flight>(this.attach_bill_flights), new Action<bill_flight>(this.detach_bill_flights));
-			this._bill_hotels = new EntitySet<bill_hotel>(new Action<bill_hotel>(this.attach_bill_hotels), new Action<bill_hotel>(this.detach_bill_hotels));
-			this._bill_tours = new EntitySet<bill_tour>(new Action<bill_tour>(this.attach_bill_tours), new Action<bill_tour>(this.detach_bill_tours));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_id", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public long user_id
-		{
-			get
-			{
-				return this._user_id;
-			}
-			set
-			{
-				if ((this._user_id != value))
-				{
-					this.Onuser_idChanging(value);
-					this.SendPropertyChanging();
-					this._user_id = value;
-					this.SendPropertyChanged("user_id");
-					this.Onuser_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string user_name
-		{
-			get
-			{
-				return this._user_name;
-			}
-			set
-			{
-				if ((this._user_name != value))
-				{
-					this.Onuser_nameChanging(value);
-					this.SendPropertyChanging();
-					this._user_name = value;
-					this.SendPropertyChanged("user_name");
-					this.Onuser_nameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_password", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string user_password
-		{
-			get
-			{
-				return this._user_password;
-			}
-			set
-			{
-				if ((this._user_password != value))
-				{
-					this.Onuser_passwordChanging(value);
-					this.SendPropertyChanging();
-					this._user_password = value;
-					this.SendPropertyChanged("user_password");
-					this.Onuser_passwordChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_fullname", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string user_fullname
-		{
-			get
-			{
-				return this._user_fullname;
-			}
-			set
-			{
-				if ((this._user_fullname != value))
-				{
-					this.Onuser_fullnameChanging(value);
-					this.SendPropertyChanging();
-					this._user_fullname = value;
-					this.SendPropertyChanged("user_fullname");
-					this.Onuser_fullnameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_phone_number", DbType="VarChar(20)")]
-		public string phone_number
-		{
-			get
-			{
-				return this._phone_number;
-			}
-			set
-			{
-				if ((this._phone_number != value))
-				{
-					this.Onphone_numberChanging(value);
-					this.SendPropertyChanging();
-					this._phone_number = value;
-					this.SendPropertyChanged("phone_number");
-					this.Onphone_numberChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_email", DbType="VarChar(100)")]
-		public string email
-		{
-			get
-			{
-				return this._email;
-			}
-			set
-			{
-				if ((this._email != value))
-				{
-					this.OnemailChanging(value);
-					this.SendPropertyChanging();
-					this._email = value;
-					this.SendPropertyChanged("email");
-					this.OnemailChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_birthday", DbType="DateTime")]
-		public System.Nullable<System.DateTime> birthday
-		{
-			get
-			{
-				return this._birthday;
-			}
-			set
-			{
-				if ((this._birthday != value))
-				{
-					this.OnbirthdayChanging(value);
-					this.SendPropertyChanging();
-					this._birthday = value;
-					this.SendPropertyChanged("birthday");
-					this.OnbirthdayChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_address", DbType="NVarChar(150)")]
-		public string address
-		{
-			get
-			{
-				return this._address;
-			}
-			set
-			{
-				if ((this._address != value))
-				{
-					this.OnaddressChanging(value);
-					this.SendPropertyChanging();
-					this._address = value;
-					this.SendPropertyChanged("address");
-					this.OnaddressChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_sex", DbType="VarChar(5)")]
-		public string sex
-		{
-			get
-			{
-				return this._sex;
-			}
-			set
-			{
-				if ((this._sex != value))
-				{
-					this.OnsexChanging(value);
-					this.SendPropertyChanging();
-					this._sex = value;
-					this.SendPropertyChanged("sex");
-					this.OnsexChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_image", DbType="VarChar(MAX)")]
-		public string user_image
-		{
-			get
-			{
-				return this._user_image;
-			}
-			set
-			{
-				if ((this._user_image != value))
-				{
-					this.Onuser_imageChanging(value);
-					this.SendPropertyChanging();
-					this._user_image = value;
-					this.SendPropertyChanged("user_image");
-					this.Onuser_imageChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_create_date", DbType="DateTime")]
-		public System.Nullable<System.DateTime> create_date
-		{
-			get
-			{
-				return this._create_date;
-			}
-			set
-			{
-				if ((this._create_date != value))
-				{
-					this.Oncreate_dateChanging(value);
-					this.SendPropertyChanging();
-					this._create_date = value;
-					this.SendPropertyChanged("create_date");
-					this.Oncreate_dateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_update_date", DbType="DateTime")]
-		public System.Nullable<System.DateTime> update_date
-		{
-			get
-			{
-				return this._update_date;
-			}
-			set
-			{
-				if ((this._update_date != value))
-				{
-					this.Onupdate_dateChanging(value);
-					this.SendPropertyChanging();
-					this._update_date = value;
-					this.SendPropertyChanged("update_date");
-					this.Onupdate_dateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_status", DbType="Int")]
-		public System.Nullable<int> status
-		{
-			get
-			{
-				return this._status;
-			}
-			set
-			{
-				if ((this._status != value))
-				{
-					this.OnstatusChanging(value);
-					this.SendPropertyChanging();
-					this._status = value;
-					this.SendPropertyChanged("status");
-					this.OnstatusChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_account_bill_flight", Storage="_bill_flights", ThisKey="user_id", OtherKey="user_id")]
-		public EntitySet<bill_flight> bill_flights
-		{
-			get
-			{
-				return this._bill_flights;
-			}
-			set
-			{
-				this._bill_flights.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_account_bill_hotel", Storage="_bill_hotels", ThisKey="user_id", OtherKey="user_id")]
-		public EntitySet<bill_hotel> bill_hotels
-		{
-			get
-			{
-				return this._bill_hotels;
-			}
-			set
-			{
-				this._bill_hotels.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_account_bill_tour", Storage="_bill_tours", ThisKey="user_id", OtherKey="user_id")]
-		public EntitySet<bill_tour> bill_tours
-		{
-			get
-			{
-				return this._bill_tours;
-			}
-			set
-			{
-				this._bill_tours.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_bill_flights(bill_flight entity)
-		{
-			this.SendPropertyChanging();
-			entity.user_account = this;
-		}
-		
-		private void detach_bill_flights(bill_flight entity)
-		{
-			this.SendPropertyChanging();
-			entity.user_account = null;
-		}
-		
-		private void attach_bill_hotels(bill_hotel entity)
-		{
-			this.SendPropertyChanging();
-			entity.user_account = this;
-		}
-		
-		private void detach_bill_hotels(bill_hotel entity)
-		{
-			this.SendPropertyChanging();
-			entity.user_account = null;
-		}
-		
-		private void attach_bill_tours(bill_tour entity)
-		{
-			this.SendPropertyChanging();
-			entity.user_account = this;
-		}
-		
-		private void detach_bill_tours(bill_tour entity)
-		{
-			this.SendPropertyChanging();
-			entity.user_account = null;
 		}
 	}
 }

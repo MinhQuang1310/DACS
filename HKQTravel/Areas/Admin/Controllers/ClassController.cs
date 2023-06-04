@@ -29,7 +29,7 @@ namespace HKQTravel.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Create(@class classes , FormCollection t)
         {
-            var className = t["className"];
+            var className = t["class_name"];
             if (ModelState.IsValid)
             {
                 classes.class_name = className;
@@ -73,7 +73,7 @@ namespace HKQTravel.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 var class1 = data.classes.SingleOrDefault(c => c.class_id == classes.class_id);
-                var className = t["className"];
+                var className = t["class_name"];
                 if (class1 == null)
                 {
                     return HttpNotFound();

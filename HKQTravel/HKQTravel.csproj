@@ -274,6 +274,18 @@
     <Content Include="Assets\Admin\dist\js\pages\dashboard.js" />
     <Content Include="Assets\Admin\dist\js\pages\dashboard2.js" />
     <Content Include="Assets\Admin\dist\js\pages\dashboard3.js" />
+    <Content Include="Assets\User\img_account\28-Mr.-Hasgaha13.jpg" />
+    <Content Include="Assets\User\img_account\dao-phu-quoc_1661246610-1.jpg" />
+    <Content Include="Assets\User\img_account\dao-phu-quoc_1661246610.jpg" />
+    <Content Include="Assets\User\img_account\dia-diem-du-lich-da-lat.png" />
+    <Content Include="Assets\User\img_account\logo.jpg" />
+    <Content Include="Assets\User\img_account\OIP.jpg" />
+    <Content Include="Assets\User\img_account\R-1.jpg" />
+    <Content Include="Assets\User\img_account\R-2.jpg" />
+    <Content Include="Assets\User\img_account\R-3.jpg" />
+    <Content Include="Assets\User\img_account\R.jpg" />
+    <Content Include="Assets\User\img_account\z3983627155522_a2810e5faca98cf68488cbe24c60027a %282%29.jpg" />
+    <Content Include="Assets\User\img_account\z4151353025906_a558a1a1ea23db2a4afb9abacd3b4222.jpg" />
     <Content Include="Assets\User\img_flight\bamboo-airways.png" />
     <Content Include="Assets\User\img_slider\about.jpg" />
     <Content Include="Assets\User\img_slider\bg-hero.jpg" />
@@ -534,9 +546,10 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Assets\Admin\img_account\" />
+    <Folder Include="Assets\Admin\img_des\" />
     <Folder Include="Assets\Admin\img_hotel\" />
     <Folder Include="Assets\Admin\img_tour\" />
-    <Folder Include="Assets\User\img_account\" />
+    <Folder Include="Assets\User\img_flight_brand\" />
     <Folder Include="Assets\User\img_hotel\" />
     <Folder Include="Content\css\halamhung\" />
     <Folder Include="Scripts\js\doantrungkien\" />

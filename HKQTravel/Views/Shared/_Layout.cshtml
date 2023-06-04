@@ -11,6 +11,7 @@
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
 
+    <link rel="shortcut icon" href="~/Assets/User/Logo/icon.jpg" type="image/x-icon">
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -132,9 +133,9 @@
                     <h4 class="text-white mb-3">Company</h4>
                     <a class="btn btn-link" href="@Url.Action("About", "Home")">About Us</a>
                     <a class="btn btn-link" href="@Url.Action("Contact", "Home")">Contact Us</a>
-                    <a class="btn btn-link" href="#">Privacy Policy</a>
-                    <a class="btn btn-link" href="#">Terms & Condition</a>
-                    <a class="btn btn-link" href="#">FAQs & Help</a>
+                    <a class="btn btn-link" href="@Url.Action("Contact", "Home")">Privacy Policy</a>
+                    <a class="btn btn-link" href="@Url.Action("Contact", "Home")">Terms & Condition</a>
+                    <a class="btn btn-link" href="@Url.Action("Contact", "Home")">FAQs & Help</a>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-white mb-3">Contact</h4>
@@ -190,8 +191,8 @@
                     <div class="col-md-6 text-center text-md-end">
                         <div class="footer-menu">
                             <a href="@Url.Action("Index","Home")">Home</a>
-                            <a href="#">Help</a>
-                            <a href="#">FQAs</a>
+                            <a href="@Url.Action("Contact","Home")">Help</a>
+                            <a href="@Url.Action("Contact","Home")">FQAs</a>
                         </div>
                     </div>
                 </div>

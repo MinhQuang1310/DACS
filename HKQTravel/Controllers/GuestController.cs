@@ -187,7 +187,39 @@ namespace HQKTravel.Controllers
                 guest.phone_number = PHONE;
                 guest.address = ADDRESS;
                 guest.create_date = DateTime.Now;
+
                 if (ImageFile != null && ImageFile.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(ImageFile.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Assets/User/img_account/"), fileName);
+
+                    //Xóa file cũ trước đó
+                    if (System.IO.File.Exists(path))
+                    {
+                        System.IO.File.Delete(path);
+                    }
+
+
+                    var fileCount = 1;
+                    //Kiểm tra sự tồn tại của file
+                    while (System.IO.File.Exists(path))
+                    {
+                        fileName = Path.GetFileNameWithoutExtension(ImageFile.FileName) + "-" + fileCount.ToString() + Path.GetExtension(ImageFile.FileName);
+                        path = Path.Combine(Server.MapPath("~/Assets/User/img_account/"), fileName);
+                        fileCount++;
+                    }
+                    ImageFile.SaveAs(path);
+                    guest.user_image = "~/Assets/User/img_account/" + fileName;
+
+                    data.SubmitChanges();
+                    return RedirectToAction("Index", "User");
+                }
+                else
+                {
+                    ModelState.AddModelError("fileUpLoad", "thếu hình");
+                    return View(guest);
+                }
+                /*if (ImageFile != null && ImageFile.ContentLength > 0)
                 {
                     var filename = Path.GetFileName(ImageFile.FileName);
                     string path = Path.Combine(Server.MapPath("~/img_guest"), filename);
@@ -198,7 +230,7 @@ namespace HQKTravel.Controllers
                 else
                 {
                     ViewBag.FileStatus = "Error while file uploading."; ;
-                }
+                }*/
                 data.user_accounts.InsertOnSubmit(guest);
                 data.SubmitChanges();
                 return RedirectToAction("Index", "Home");
@@ -344,16 +376,16 @@ namespace HQKTravel.Controllers
 
             //create variable and check info
             var check_user = data.user_accounts.SingleOrDefault(model => model.user_name == userAccount.user_name && model.user_password == userAccount.user_password);
-            var check_password = data.user_accounts.SingleOrDefault(model => model.user_password == pass);
+/*            var check_password = data.user_accounts.SingleOrDefault(model => model.user_password == pass);*/
 
             if (check_user == null)
             {
                 ViewData["WrongUser"] = "Vui lòng nhập đúng thông tin";
             }
-            else if (check_password == null)
+/*            else if (check_password == null)
             {
                 ViewData["WrongPassword"] = "Vui lòng nhập đúng mật khẩu";
-            }
+            }*/
             else if (confirm_pass != new_pass)
             {
                 ViewData["WrongNewPassword"] = "Vui lòng nhập khớp mật khẩu mới";
